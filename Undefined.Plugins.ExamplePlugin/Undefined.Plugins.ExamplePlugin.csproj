@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Undefined.Plugins">
+            <HintPath>..\Undefined.Plugins.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Undefined.Plugins.ExampleApi\Undefined.Plugins.ExampleApi.csproj" />
+    </ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="copy /y &quot;$(OutDir)$(TargetName).dll&quot; &quot;../Undefined.Plugins.Tests/bin/Release/net9.0/plugins/$(TargetName).dll&quot;" />
+    </Target>
+</Project>
